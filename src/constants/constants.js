@@ -21,5 +21,19 @@ export const PAGES = {
     search: {
         id: 'search',
         title: 'Search'
+    },
+    article: {
+        id: 'article',
+        title: 'Article'
     }
+};
+
+export const CATEGORIES = {
+    business: 'Business',
+    entertainment: 'Entertainment',
+    general: 'General',
+    health: 'Health',
+    science: 'Science',
+    sports: 'Sports',
+    technology: 'Technology'
 };

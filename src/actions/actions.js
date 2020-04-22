@@ -23,11 +23,18 @@ const fetchTopNewsFailed = () => ({
     type: Actions.FETCH_TOP_NEWS_FAILED
 });
 
+const selectArticle = (article) => ({
+    type: Actions.SELECT_ARTICLE,
+    article
+});
+
 export {
     setLanguage,
     setPage,
 
     fetchTopNewsStarted,
     fetchTopNewsFinished,
-    fetchTopNewsFailed
+    fetchTopNewsFailed,
+
+    selectArticle
 };

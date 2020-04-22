@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
 import ContentComponent from './components/ContentComponent';
 import { LANG, PAGES } from './constants/constants';
 import { GlobalStateProvider } from './helpers/useGlobalState';
 import reducer from './reducers/reducers'
-import Navigation from './components/Navigation';
+
+import './App.scss';
+import Header from './components/Header/Header';
 
 const initialState = {
   language: LANG.US.short,
@@ -18,7 +19,7 @@ const initialState = {
 function App() {
   return (
     <GlobalStateProvider initialState={initialState} reducer={reducer}>
-      <Navigation />
+      <Header />
       <ContentComponent />
     </GlobalStateProvider>
   );

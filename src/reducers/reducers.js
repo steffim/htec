@@ -1,4 +1,5 @@
 import * as Actions from '../constants/actionTypes'
+import { PAGES } from '../constants/constants';
 
 const setLanguage = (state, language) => ({
     ...state,
@@ -14,7 +15,8 @@ const fetchTopNewsStarted = (state) => ({
     ...state,
     articles: {
         ...state.articles,
-        loading: true
+        loading: true,
+        data: []
     }
 });
 
@@ -35,6 +37,12 @@ const fetchTopNewsFailed = (state) => ({
     }
 });
 
+const selectArticle = (state, article) => ({
+    ...state,
+    selectedPage: PAGES.article.id,
+    selectedArticle: article
+});
+
 export default function reducer(state, action) {
     switch(action.type) {
         case Actions.SET_LANGUAGE:
@@ -47,6 +55,8 @@ export default function reducer(state, action) {
             return fetchTopNewsFinished(state, action.articles);
         case Actions.FETCH_TOP_NEWS_FAILED:
             return fetchTopNewsFailed(state);
+        case Actions.SELECT_ARTICLE:
+            return selectArticle(state, action.article);
         default:
             return state;
     }
