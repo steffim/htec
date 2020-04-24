@@ -37,3 +37,5 @@ export const CATEGORIES = {
     sports: 'Sports',
     technology: 'Technology'
 };
+
+export const CATEGORY_MAX_ITEMS = 5;

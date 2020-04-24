@@ -14,9 +14,10 @@ const fetchTopNewsStarted = () => ({
     type: Actions.FETCH_TOP_NEWS_STARTED
 });
 
-const fetchTopNewsFinished = (articles) => ({
+const fetchTopNewsFinished = (articles, updatedAt) => ({
     type: Actions.FETCH_TOP_NEWS_FINISHED,
-    articles
+    articles,
+    updatedAt
 });
 
 const fetchTopNewsFailed = () => ({
@@ -28,6 +29,23 @@ const selectArticle = (article) => ({
     article
 });
 
+const fetchNewsByCategoryStarted = (category) => ({
+    type: Actions.FETCH_NEWS_BY_CATEGORY_STARTED,
+    category
+});
+
+const fetchNewsByCategoryFinished = (category, articles, updatedAt) => ({
+    type: Actions.FETCH_NEWS_BY_CATEGORY_FINISHED,
+    category,
+    articles,
+    updatedAt
+});
+
+const fetchNewsByCategoryFailed = (category) => ({
+    type: Actions.FETCH_NEWS_BY_CATEGORY_FAILED,
+    category
+});
+
 export {
     setLanguage,
     setPage,
@@ -36,5 +54,9 @@ export {
     fetchTopNewsFinished,
     fetchTopNewsFailed,
 
-    selectArticle
+    selectArticle,
+
+    fetchNewsByCategoryStarted,
+    fetchNewsByCategoryFinished,
+    fetchNewsByCategoryFailed
 };
