@@ -1,11 +1,16 @@
 import React from 'react';
-import ContentComponent from './components/ContentComponent';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import { LANG, PAGES } from './constants/constants';
+import { LANG, PAGES, CATEGORIES } from './constants/constants';
 import { GlobalStateProvider } from './helpers/useGlobalState';
-import reducer from './reducers/reducers'
+import reducer from './reducers/reducers';
 
 import './App.scss';
+import TopNews from './pages/TopNews/TopNews';
+import Categories from './pages/Categories/Categories';
+import Search from './pages/Search';
+import ArticlePage from './pages/ArticlePage/ArticlePage';
+import Category from './pages/Category/Category';
 
 const initialState = {
     language: LANG.US.short,
@@ -15,51 +20,58 @@ const initialState = {
         data: {},
         updatedAt: null
     },
-    categories: {
-        business: {
+    categories: Object.keys(CATEGORIES).reduce((acc, category) => {
+        acc[category] = {
             loading: false,
             data: {},
             updatedAt: null
-        },
-        entertainment: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        },
-        general: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        },
-        health: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        },
-        science: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        },
-        sports: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        },
-        technology: {
-            loading: false,
-            data: {},
-            updatedAt: null
-        }
+        };
+
+        return acc;
+    }, {}),
+    search: {
+        loading: false,
+        data: {}
     }
 };
 
 function App() {
     return (
-        <GlobalStateProvider initialState={initialState} reducer={reducer}>
-            <Header />
-            <ContentComponent />
-        </GlobalStateProvider>
+        <Router>
+            <GlobalStateProvider initialState={initialState} reducer={reducer}>
+                <Header />
+                <Switch>
+                    <Route exact path="/">
+                        <TopNews />
+                    </Route>
+
+                    <Route path="/topNews/:articleId">
+                        <ArticlePage />
+                    </Route>
+                    <Route path="/topNews">
+                        <TopNews />
+                    </Route>
+                
+                    <Route path="/categories/:categoryId/:articleId">
+                        <ArticlePage />
+                    </Route>
+                    <Route path="/categories/:categoryId">
+                        <Category />
+                    </Route>
+                    <Route path="/categories">
+                        <Categories />
+                    </Route>
+                    
+                    <Route path="/search/:articleId">
+                        <ArticlePage />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
+                    </Route>
+                    
+                </Switch>
+            </GlobalStateProvider>
+        </Router>
     );
 }
 

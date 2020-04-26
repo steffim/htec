@@ -1,5 +1,5 @@
 import * as Actions from '../constants/actionTypes'
-import { PAGES } from '../constants/constants';
+import { PAGES, CATEGORIES } from '../constants/constants';
 
 const setLanguage = (state, language) => ({
     ...state,
@@ -8,6 +8,19 @@ const setLanguage = (state, language) => ({
         ...state.topNews,
         data: {},
         updatedAt: null
+    },
+    categories: Object.keys(CATEGORIES).reduce((acc, category) => {
+        acc[category] = {
+            loading: false,
+            data: {},
+            updatedAt: null
+        };
+
+        return acc;
+    }, {}),
+    search: {
+        loading: false,
+        data: {}
     }
 });
 
@@ -16,6 +29,7 @@ const setPage = (state, page) => ({
     selectedPage: page
 });
 
+// fetch top news
 const fetchTopNewsStarted = (state) => ({
     ...state,
     topNews: {
@@ -40,6 +54,34 @@ const fetchTopNewsFailed = (state) => ({
     topNews: {
         ...state.articles,
         loading: false
+    }
+});
+
+// fetch top news by term
+const fetchTopNewsByTermStarted = (state) => ({
+    ...state,
+    search: {
+        ...state.search,
+        loading: true,
+        data: {}
+    }
+});
+
+const fetchTopNewsByTermFinished = (state, { articles }) => ({
+    ...state,
+    search: {
+        ...state.search,
+        loading: true,
+        data: articles
+    }
+});
+
+const fetchTopNewsByTermFailed = (state) => ({
+    ...state,
+    search: {
+        ...state.search,
+        loading: false,
+        data: {}
     }
 });
 
@@ -102,15 +144,22 @@ export default function reducer(state, action) {
         case Actions.FETCH_TOP_NEWS_FAILED:
             return fetchTopNewsFailed(state);
 
+        case Actions.FETCH_TOP_NEWS_BY_TERM_STARTED:
+            return fetchTopNewsByTermStarted(state);
+        case Actions.FETCH_TOP_NEWS_BY_TERM_FINISHED:
+            return fetchTopNewsByTermFinished(state, action);
+        case Actions.FETCH_TOP_NEWS_BY_TERM_FAILED:
+            return fetchTopNewsByTermFailed(state);
+
         case Actions.SELECT_ARTICLE:
             return selectArticle(state, action.article);
 
         case Actions.FETCH_NEWS_BY_CATEGORY_STARTED:
-            return fetchNewsByCategoryStarted(state);
+            return fetchNewsByCategoryStarted(state, action.category);
         case Actions.FETCH_NEWS_BY_CATEGORY_FINISHED:
             return fetchNewsByCategoryFinished(state, action);
         case Actions.FETCH_NEWS_BY_CATEGORY_FAILED:
-            return fetchNewsByCategoryFailed(state);
+            return fetchNewsByCategoryFailed(state, action.category);
 
         default:
             return state;

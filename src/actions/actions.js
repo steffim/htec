@@ -10,6 +10,7 @@ const setPage = (page) => ({
     page
 });
 
+// fetch top news
 const fetchTopNewsStarted = () => ({
     type: Actions.FETCH_TOP_NEWS_STARTED
 });
@@ -22,6 +23,20 @@ const fetchTopNewsFinished = (articles, updatedAt) => ({
 
 const fetchTopNewsFailed = () => ({
     type: Actions.FETCH_TOP_NEWS_FAILED
+});
+
+// fetch top news by term
+const fetchTopNewsByTermStarted = () => ({
+    type: Actions.FETCH_TOP_NEWS_BY_TERM_STARTED
+});
+
+const fetchTopNewsByTermFinished = (articles) => ({
+    type: Actions.FETCH_TOP_NEWS_BY_TERM_FINISHED,
+    articles
+});
+
+const fetchTopNewsByTermFailed = () => ({
+    type: Actions.FETCH_TOP_NEWS_BY_TERM_FAILED
 });
 
 const selectArticle = (article) => ({
@@ -53,6 +68,10 @@ export {
     fetchTopNewsStarted,
     fetchTopNewsFinished,
     fetchTopNewsFailed,
+
+    fetchTopNewsByTermStarted,
+    fetchTopNewsByTermFinished,
+    fetchTopNewsByTermFailed,
 
     selectArticle,
 

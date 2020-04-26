@@ -7,31 +7,24 @@ import Article from '../../components/Article/Article';
 import Loader from '../../components/Loader/Loader';
 import Page from '../../components/Page/Page';
 import Grid from '../../components/Grid/Grid';
+import { useRouteMatch } from 'react-router-dom';
 
 function TopNews() {
     const [{ language, topNews }, dispatch] = useGlobalState();
-    const articles = Object.values(topNews.data).map(article => (
-        <Article
-            key={`article-${article.id}`}
-            id={article.id}
-            title={article.title}
-            urlToImage={article.urlToImage}
-            description={article.description}
-        />
-    ));
+
     useEffect(() => {
         function fetchNews() {
             if (Date.now() - topNews.updatedAt <= 60000) {
                 return;
             }
-            
+
             dispatch(fetchTopNewsStarted());
 
             newsService.fetchTopNews(language)
             .then(response => {
                 if (response.status === 'ok') {
                     const updatedAt = Date.now();
-                    const normalizedArticles = newsService.normalizeArticles(response.articles);
+                    const normalizedArticles = newsService.normalizeArticles(response.articles, '/topNews');
 
                     dispatch(fetchTopNewsFinished(normalizedArticles, updatedAt));
                 } else {
@@ -42,6 +35,16 @@ function TopNews() {
 
         fetchNews();
     }, [language]);
+
+    const articles = Object.values(topNews.data).map(article => (
+        <Article
+            key={`article-${article.id}`}
+            title={article.title}
+            urlToImage={article.urlToImage}
+            description={article.description}
+            articleUrl={article.path}
+        />
+    ));
 
     return (
         <Page classNames="TopNews" title={`Top news from ${LANG[language.toUpperCase()].long}`}>

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useGlobalState } from '../../helpers/useGlobalState';
-import { selectArticle } from '../../actions/actions';
+import { Link } from 'react-router-dom';
 
 import './Article.scss';
 
 const propTypes = {
-    id: PropTypes.number.isRequired,
+    articleUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     urlToImage: PropTypes.string,
     description: PropTypes.string,
@@ -19,19 +18,13 @@ const defaultProps = {
     description: ''
 };
 
-function Article({ id, classNames, title, urlToImage, description }) {
-    const [,dispatch] = useGlobalState();
-
-    function onMoreClick() {
-        dispatch(selectArticle(id));
-    }
-console.log('Article');
+function Article({ articleUrl, classNames, title, urlToImage, description }) {
     return (
         <div className={`Article ${classNames}`}>
             <h2 className="Article-title">{title}</h2>
-            {urlToImage !== '' && <img className="Article-img" src={urlToImage} alt={title} />}
-            {description !== '' && <p className="Article-description">{ description }</p>}
-            <span className="Article-more" onClick={onMoreClick}>More ></span>
+            {(urlToImage && urlToImage !== '') && <img className="Article-img" src={urlToImage} alt={title} />}
+            {(description && description !== '') && <p className="Article-description">{ description }</p>}
+            <Link to={articleUrl}><span className="Article-more">More ></span></Link>
         </div>
     );
 }

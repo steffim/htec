@@ -8,16 +8,22 @@ class NewsService {
                 .then(response => response.json());
     }
 
+    fetchTopNewsByTerm(country, term) {
+        return fetch(`https://newsapi.org/v2/top-headlines?q=${term}&country=${country}&apiKey=${this.apiKey}`)
+                .then(response => response.json());
+    }
+
     fetchNewsByCategory(country, category) {
         return fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.apiKey}`)
                 .then(response => response.json());
     }
 
-    normalizeArticles(articles) {
+    normalizeArticles(articles, path) {
         return articles.reduce((acc, value, index) => {
             acc[index] = {
                 ...value,
-                id: index
+                id: index,
+                path: `${path}/${index}`
             }
 
             return acc;
@@ -25,4 +31,4 @@ class NewsService {
     }
 }
 
-export const newsService = new NewsService('4cb281adf82f48a08c58e5bf84a964cc');
+export const newsService = new NewsService('1ba5369dda8142fba9d4e08ac1583c79');
