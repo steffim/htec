@@ -28,6 +28,24 @@ export const PAGES = {
     }
 };
 
+export const navItems = [
+    {
+        id: PAGES.topNews.id,
+        path: '/topNews',
+        text: PAGES.topNews.title
+    },
+    {
+        id: PAGES.categories.id,
+        path: '/categories',
+        text: PAGES.categories.title
+    },
+    {
+        id: PAGES.search.id,
+        path: '/search',
+        text: PAGES.search.title
+    }
+];
+
 export const CATEGORIES = {
     business: 'Business',
     entertainment: 'Entertainment',
@@ -39,3 +57,4 @@ export const CATEGORIES = {
 };
 
 export const CATEGORY_MAX_ITEMS = 5;
+export const TIMEOUT_BETWEEN_REQUESTS = 60000;

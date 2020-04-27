@@ -8,7 +8,7 @@ import reducer from './reducers/reducers';
 import './App.scss';
 import TopNews from './pages/TopNews/TopNews';
 import Categories from './pages/Categories/Categories';
-import Search from './pages/Search';
+import Search from './pages/Search/Search';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import Category from './pages/Category/Category';
 

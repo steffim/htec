@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useGlobalState } from '../../helpers/useGlobalState';
 import { newsService } from '../../services/newsService'
-import { LANG } from '../../constants/constants';
+import { LANG, TIMEOUT_BETWEEN_REQUESTS } from '../../constants/constants';
 import { fetchTopNewsStarted, fetchTopNewsFailed, fetchTopNewsFinished } from '../../actions/actions';
 import Article from '../../components/Article/Article';
 import Loader from '../../components/Loader/Loader';
 import Page from '../../components/Page/Page';
 import Grid from '../../components/Grid/Grid';
-import { useRouteMatch } from 'react-router-dom';
 
 function TopNews() {
     const [{ language, topNews }, dispatch] = useGlobalState();
 
     useEffect(() => {
         function fetchNews() {
-            if (Date.now() - topNews.updatedAt <= 60000) {
+            if (Date.now() - topNews.updatedAt <= TIMEOUT_BETWEEN_REQUESTS) {
                 return;
             }
 

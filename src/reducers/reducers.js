@@ -71,7 +71,7 @@ const fetchTopNewsByTermFinished = (state, { articles }) => ({
     ...state,
     search: {
         ...state.search,
-        loading: true,
+        loading: false,
         data: articles
     }
 });
@@ -103,9 +103,7 @@ const fetchNewsByCategoryStarted = (state, category) => ({
     }
 });
 
-const fetchNewsByCategoryFinished = (state, { category, articles, updatedAt }) => {
-    console.log(articles);
-    return {
+const fetchNewsByCategoryFinished = (state, { category, articles, updatedAt }) => ({
     ...state,
     categories: {
         ...state.categories,
@@ -116,8 +114,7 @@ const fetchNewsByCategoryFinished = (state, { category, articles, updatedAt }) =
             updatedAt
         }
     }
-}
-};
+});
 
 const fetchNewsByCategoryFailed = (state, category) => ({
     ...state,
