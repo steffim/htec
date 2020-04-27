@@ -1,0 +1,6 @@
+@import '../../styles/variables.scss';
+
+.LanguageSwitcher-item {
+    border-left: solid 1px $border-color;
+    border-right: none;
+}

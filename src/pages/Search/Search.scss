@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.Search {
+    &-input {
+        box-sizing: border-box;
+        font-size: $default-font-size;
+        padding: 10px;
+        display: block;
+        margin: 0 auto;
+        width: 350px;
+        max-width: 100%;
+        outline: none;
+    }
+}

@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.Expand {
+    border: solid 1px $border-color;
+
+    &-header {
+        padding: 10px;
+        padding-right: 35px;
+        font-size: $default-font-size;
+        cursor: pointer;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        position: relative;
+
+        &-title {
+            margin: 0;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &-icon-holder {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .arrow {
+            &.open {
+                transform: rotate(45deg);
+            }
+
+            &.closed {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    &.expanded {
+        .Expand-header {
+            border-bottom: solid 1px $border-color;
+        }
+    }
+
+    &-content {
+        padding: 10px;
+    }
+}

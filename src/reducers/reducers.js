@@ -85,12 +85,6 @@ const fetchTopNewsByTermFailed = (state) => ({
     }
 });
 
-const selectArticle = (state, articleId) => ({
-    ...state,
-    selectedPage: PAGES.article.id,
-    selectedArticle: state.topNews.data[articleId]
-});
-
 const fetchNewsByCategoryStarted = (state, category) => ({
     ...state,
     categories: {
@@ -147,9 +141,6 @@ export default function reducer(state, action) {
             return fetchTopNewsByTermFinished(state, action);
         case Actions.FETCH_TOP_NEWS_BY_TERM_FAILED:
             return fetchTopNewsByTermFailed(state);
-
-        case Actions.SELECT_ARTICLE:
-            return selectArticle(state, action.article);
 
         case Actions.FETCH_NEWS_BY_CATEGORY_STARTED:
             return fetchNewsByCategoryStarted(state, action.category);

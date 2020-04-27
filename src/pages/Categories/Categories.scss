@@ -1,0 +1,30 @@
+.Categories-list {
+    margin: 0;
+    padding: 0;
+
+    &-item {
+        list-style: none;
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+        
+        &-articles {
+            width: 100%;
+            min-height: 100px;
+            position: relative;
+
+            &-article {
+                display: inline-block;
+                vertical-align: top;
+                width: 200px;
+                margin-right: 20px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

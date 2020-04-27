@@ -1,0 +1,91 @@
+@import '../../styles/variables.scss';
+
+.Header {
+    border: solid 1px $border-color;
+    border-bottom: none;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .mobile-menu {
+        position: absolute;
+        right: 5%;
+        top: 7px;
+
+        &-line {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+        }
+    }
+
+    .closed {
+        display: none;
+    }
+}
+
+.Navigation-list {
+    margin: 0;
+    padding: 0;
+
+    &-item {
+        display: inline-block;
+        border-right: solid 1px $border-color;
+
+        a {
+            display: block;
+            padding: 15px 30px;
+
+            &:hover,
+            &.selected {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+
+    .LanguageSwitcher-item.Navigation-list-item {
+        border-right: none;
+    }
+}
+
+@media all and (max-width: 576px) {
+    .Header {
+        min-height: 50px;
+        position: relative;
+
+        &-navigation-holder {
+            overflow: hidden;
+            margin-top: 50px;
+            border-top: solid 1px $border-color;
+
+            .LanguageSwitcher {
+                &-list {
+                    display: flex;
+                }
+
+                &-item {
+                    flex: 1;    
+                }
+            }
+        }
+    }
+    .Navigation {
+        float: none;
+        width: 100%;
+
+        &-list-item {
+            display: block;
+            border-left: none;
+            border-right: none;
+            border-bottom: solid 1px $border-color;
+            text-align: center;
+        }
+    }
+}
+
+@media all and (min-width: 577px) and (max-width: 768px) {
+    .Navigation-list-item a {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

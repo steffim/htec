@@ -39,11 +39,6 @@ const fetchTopNewsByTermFailed = () => ({
     type: Actions.FETCH_TOP_NEWS_BY_TERM_FAILED
 });
 
-const selectArticle = (article) => ({
-    type: Actions.SELECT_ARTICLE,
-    article
-});
-
 const fetchNewsByCategoryStarted = (category) => ({
     type: Actions.FETCH_NEWS_BY_CATEGORY_STARTED,
     category
@@ -72,8 +67,6 @@ export {
     fetchTopNewsByTermStarted,
     fetchTopNewsByTermFinished,
     fetchTopNewsByTermFailed,
-
-    selectArticle,
 
     fetchNewsByCategoryStarted,
     fetchNewsByCategoryFinished,
